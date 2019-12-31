@@ -1,0 +1,33 @@
+{
+  "name": "ddd-typescript",
+  "version": "1.0.0",
+  "description": "DDD using typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sz332/ddd-typescript.git"
+  },
+  "keywords": [
+    "ddd",
+    "typescript"
+  ],
+  "author": "zsolt.sandor@gmail.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sz332/ddd-typescript/issues"
+  },
+  "homepage": "https://github.com/sz332/ddd-typescript#readme",
+  "devDependencies": {
+    "@types/node": "^13.1.2",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
