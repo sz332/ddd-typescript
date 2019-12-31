@@ -1,4 +1,4 @@
-import {Money} from "./entity/Money";
+import {Money} from "./domain/Money";
 
 interface Person {
     firstName: String,
