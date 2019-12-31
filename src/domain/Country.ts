@@ -1,13 +1,13 @@
 export class Country {
 
-    private readonly _name: string;
+    private readonly _code: string;
 
-    constructor(name: string) {
-        this._name = name;
+    constructor(code: string) {
+        this._code = code;
     }
 
-    name(): string {
-        return this._name;
+    code(): string {
+        return this._code;
     }
 
 }

@@ -4,7 +4,7 @@
   "description": "DDD using typescript",
   "main": "index.js",
   "scripts": {
-    "test": "jest",  
+    "test": "jest",
     "coverage": "jest --coverage",
     "start:dev": "nodemon",
     "build": "rimraf ./build && tsc",
@@ -27,11 +27,13 @@
   "devDependencies": {
     "@types/jest": "^24.0.25",
     "@types/node": "^13.1.2",
+    "@types/uuid": "^3.4.6",
     "jest": "^24.9.0",
     "nodemon": "^2.0.2",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.2.0",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
-  }
+  },
+  "dependencies": {}
 }
