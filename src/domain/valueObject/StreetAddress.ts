@@ -1,7 +1,7 @@
 import { ValueObject } from "../../core/ValueObject";
 
 interface StreetAddressProps {
-    name: string
+    value: string
 }
 
 export class StreetAddress extends ValueObject<StreetAddressProps>{
@@ -11,11 +11,11 @@ export class StreetAddress extends ValueObject<StreetAddressProps>{
     }
 
     public static create(name: string): StreetAddress {
-        return new StreetAddress({ name });
+        return new StreetAddress({ value: name });
     }
 
-    name(): string {
-        return this.props.name;
+    value(): string {
+        return this.props.value;
     }
 
 }

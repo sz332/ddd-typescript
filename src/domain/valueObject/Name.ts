@@ -1,7 +1,7 @@
 import { ValueObject } from "../../core/ValueObject";
 
 interface NameProps {
-    name: string
+    value: string
 }
 
 export class Name extends ValueObject<NameProps>{
@@ -11,11 +11,11 @@ export class Name extends ValueObject<NameProps>{
     }
 
     public static create(name: string): Name {
-        return new Name({ name });
+        return new Name({ value: name });
     }
 
-    name(): string {
-        return this.props.name;
+    value(): string {
+        return this.props.value;
     }
 
 }

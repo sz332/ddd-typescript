@@ -1,7 +1,7 @@
 import { ValueObject } from "../../core/ValueObject";
 
 export interface EmailProps {
-    email: string;
+    value: string;
 }
 
 export class Email extends ValueObject<EmailProps>{
@@ -15,11 +15,11 @@ export class Email extends ValueObject<EmailProps>{
             throw new Error("Email address is invalid");
         }
 
-        return new Email({ email });
+        return new Email({ value: email });
     }
 
-    asString(): string {
-        return this.props.email;
+    value(): string {
+        return this.props.value;
     }
 
 }

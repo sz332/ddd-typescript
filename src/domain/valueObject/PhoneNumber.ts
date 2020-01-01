@@ -1,7 +1,7 @@
 import { ValueObject } from "../../core/ValueObject";
 
 interface PhoneNumberProps {
-    number: string
+    value: string
 }
 
 export class PhoneNumber extends ValueObject<PhoneNumberProps>{
@@ -15,11 +15,11 @@ export class PhoneNumber extends ValueObject<PhoneNumberProps>{
             throw new Error("Invalid phone number");
         }
 
-        return new PhoneNumber({ number });
+        return new PhoneNumber({ value: number });
     }
 
-    number(): string {
-        return this.props.number;
+    value(): string {
+        return this.props.value;
     }
 
 }
