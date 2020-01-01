@@ -1,9 +1,10 @@
 import { ValueObject } from "../../core/ValueObject";
+import { Length } from "./Length";
 
 interface DimensionProps {
-    width: number,
-    height: number,
-    depth: number
+    width: Length,
+    height: Length,
+    depth: Length
 }
 
 export class Dimension extends ValueObject<DimensionProps>{
@@ -12,19 +13,19 @@ export class Dimension extends ValueObject<DimensionProps>{
         super(props);
     }
 
-    public static create(width: number, height: number, depth: number): Dimension {
+    public static create(width: Length, height: Length, depth: Length): Dimension {
         return new Dimension({ width, height, depth });
     }
 
-    width(): number {
+    width(): Length {
         return this.props.width;
     }
 
-    height(): number {
+    height(): Length {
         return this.props.height;
     }
 
-    depth(): number {
+    depth(): Length {
         return this.props.depth;
     }
 

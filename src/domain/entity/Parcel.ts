@@ -13,11 +13,9 @@ export class Parcel extends Entity<ParcelProps>{
     private constructor(props: ParcelProps, id?: UniqueEntityID) {
         super(props, id);
     }
-
+ 
     public static create(dimension: Dimension, weigth?: Weight): Parcel {
         return new Parcel({ dimension, weigth });
     }
-
-    
 
 }
