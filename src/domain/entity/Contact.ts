@@ -1,5 +1,5 @@
 import { Email } from "../valueObject/Email";
-import { Address } from "./Address";
+import { Address } from "../valueObject/Address";
 import uuid = require("uuid");
 import { PhoneNumber } from "../valueObject/PhoneNumber";
 

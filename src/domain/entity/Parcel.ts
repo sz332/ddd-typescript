@@ -18,4 +18,6 @@ export class Parcel extends Entity<ParcelProps>{
         return new Parcel({ dimension, weigth });
     }
 
+    
+
 }
