@@ -1,19 +1,16 @@
-import { Email } from "./Email";
-import { PhoneNumber } from "./PhoneNumber";
+import { Email } from "../valueObject/Email";
 import { Address } from "./Address";
-import { UUID } from "./UUID";
 import uuid = require("uuid");
+import { PhoneNumber } from "../valueObject/PhoneNumber";
 
 export class Contact {
 
-    _id: UUID;
     _email: Email;
     _phoneNumber: PhoneNumber;
     _addresses: Array<Address>;
     _defaultAddress: Address;
 
-    constructor(id: UUID, email: Email, phoneNumber: PhoneNumber, _defaultAddress: Address) {
-        this._id = id;
+    constructor(email: Email, phoneNumber: PhoneNumber, _defaultAddress: Address) {
         this._email = email;
         this._phoneNumber = phoneNumber;
         this._addresses = new Array<Address>();

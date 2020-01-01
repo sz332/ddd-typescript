@@ -1,4 +1,4 @@
-import {Money} from "./domain/Money";
+import {Money} from "./domain/valueObject/Money";
 
 interface Person {
     firstName: String,
@@ -13,7 +13,7 @@ let john = { firstName: "John", lastName: "Doe" }
 
 greeter(john);
 
-let money = new Money(30, "USD");
+let money = Money.create(30, "USD");
 
 console.log(money.toString());
 

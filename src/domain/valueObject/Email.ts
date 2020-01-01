@@ -1,0 +1,25 @@
+import { ValueObject } from "../../core/ValueObject";
+
+export interface EmailProps {
+    email: string;
+}
+
+export class Email extends ValueObject<EmailProps>{
+
+    private constructor(props: EmailProps) {
+        super(props);
+    }
+
+    public static create(email: string): Email {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) === false) {
+            throw new Error("Email address is invalid");
+        }
+
+        return new Email({ email });
+    }
+
+    asString(): string {
+        return this.props.email;
+    }
+
+}
