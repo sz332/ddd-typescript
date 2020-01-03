@@ -41,8 +41,7 @@ describe('UserRepository', () => {
 
         expect(userCountAfterRemove + 1).toEqual(userCountBeforeRemove);
     });
-
-    it('Repository with unknown id will not return a valid user', () => {
+    it('Repository with unknown id will return a failed result', () => {
 
         let repository = new InMemoryUserRepository();
         let storedUserOrError = repository.findBy(new UniqueEntityID('12345'));
