@@ -23,4 +23,22 @@ describe('UserRepository', () => {
         expect(storedUser.equals(user)).toBeTruthy();
     });
 
+    it('User can be added to repository and removed', () => {
+
+        let repository = new InMemoryUserRepository();
+
+        let user = User.create(Email.create('john.doe@mail.com'), Password.create('testing123'), UserType.NORMAL);
+        repository.add(user);
+
+        let userCountBeforeRemove = repository.findAll().length;
+
+        let userId = user.id();
+
+        repository.remove(userId);
+
+        let userCountAfterRemove = repository.findAll().length;
+
+        expect(userCountAfterRemove + 1).toEqual(userCountBeforeRemove);
+    });
+
 });
