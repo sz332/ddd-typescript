@@ -41,5 +41,6 @@ export class User extends Entity<UserProps>{
         this.props.password = password;
     }
 
+    
 
 }

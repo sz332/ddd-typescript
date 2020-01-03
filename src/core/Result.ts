@@ -26,7 +26,12 @@ export class Result<T> {
         return this.result.error;
     }
 
-    get value(): T | undefined {
+    get value(): T {
+
+        if (!this.result.value){
+            throw new Error("Value was not set in Result");
+        }
+
         return this.result.value;
     }
 
