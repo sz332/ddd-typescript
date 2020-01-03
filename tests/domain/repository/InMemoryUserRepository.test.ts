@@ -2,6 +2,7 @@ import { User, UserType } from "../../../src/domain/entity/User";
 import { Password } from "../../../src/domain/valueObject/Password";
 import { Email } from "../../../src/domain/valueObject/Email";
 import { InMemoryUserRepository } from "../../../src/domain/repository/InMemoryUserRepository";
+import { UniqueEntityID } from "../../../src/core/UniqueEntityID";
 
 describe('UserRepository', () => {
 
@@ -39,6 +40,14 @@ describe('UserRepository', () => {
         let userCountAfterRemove = repository.findAll().length;
 
         expect(userCountAfterRemove + 1).toEqual(userCountBeforeRemove);
+    });
+
+    it('Repository with unknown id will not return a valid user', () => {
+
+        let repository = new InMemoryUserRepository();
+        let storedUserOrError = repository.findBy(new UniqueEntityID('12345'));
+
+        expect(storedUserOrError.isFailed).toBeTruthy();
     });
 
 });
