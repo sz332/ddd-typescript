@@ -22,4 +22,8 @@ export class Email extends ValueObject<EmailProps>{
         return this.props.value;
     }
 
+    matches(email: string): boolean {
+        return this.props.value === email;
+    }
+
 }

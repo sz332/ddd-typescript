@@ -25,6 +25,14 @@ export class User extends Entity<UserProps>{
         return new User({ email, password, type });
     }
 
+    public email(): Email {
+        return this.props.email;
+    }
+
+    public password(): Password {
+        return this.props.password;
+    }
+
     public changeType(newType: UserType) {
         this.props.type = newType;
     }
