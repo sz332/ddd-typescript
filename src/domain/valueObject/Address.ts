@@ -26,5 +26,5 @@ export class Address extends ValueObject<AddressProps>{
     public static create(name: Name, country: Country, city: City, poNumber: PoNumber, streetAddress: StreetAddress): Address {
         return new Address({ name, country, city, poNumber, streetAddress });
     }
-
+ 
 }
