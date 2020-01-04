@@ -8,45 +8,51 @@ describe('UserRepository', () => {
 
     it('User can be added to repository and queried back', () => {
 
-        let repository = new InMemoryUserRepository();
+        (async function () {
+            let repository = new InMemoryUserRepository();
 
-        let user = User.create(Email.create('john.doe@mail.com'), Password.create('testing123'), UserType.NORMAL);
-        repository.add(user);
+            let user = User.create(Email.create('john.doe@mail.com'), Password.create('testing123'), UserType.NORMAL);
+            repository.add(user);
 
-        let userId = user.id();
+            let userId = user.id();
 
-        let storedUserOrError = repository.findBy(userId);
+            let storedUserOrError = await repository.findBy(userId);
 
-        expect(storedUserOrError.isSuccess).toBeTruthy();
+            expect(storedUserOrError.isSuccess).toBeTruthy();
 
-        let storedUser = storedUserOrError.value;
+            let storedUser = storedUserOrError.value;
 
-        expect(storedUser.equals(user)).toBeTruthy();
+            expect(storedUser.equals(user)).toBeTruthy();
+        })();
     });
 
     it('User can be added to repository and removed', () => {
 
-        let repository = new InMemoryUserRepository();
+        (async function () {
+            let repository = new InMemoryUserRepository();
 
-        let user = User.create(Email.create('john.doe@mail.com'), Password.create('testing123'), UserType.NORMAL);
-        repository.add(user);
+            let user = User.create(Email.create('john.doe@mail.com'), Password.create('testing123'), UserType.NORMAL);
+            repository.add(user);
 
-        let userCountBeforeRemove = repository.findAll().length;
+            let userCountBeforeRemove = (await repository.findAll()).length;
 
-        let userId = user.id();
+            let userId = user.id();
 
-        repository.remove(userId);
+            repository.remove(userId);
 
-        let userCountAfterRemove = repository.findAll().length;
+            let userCountAfterRemove = (await repository.findAll()).length;
 
-        expect(userCountAfterRemove + 1).toEqual(userCountBeforeRemove);
+            expect(userCountAfterRemove + 1).toEqual(userCountBeforeRemove);
+        })();
     });
     it('Repository with unknown id will return a failed result', () => {
 
-        let repository = new InMemoryUserRepository();
-        let storedUserOrError = repository.findBy(new UniqueEntityID('12345'));
+        (async function () {
+            let repository = new InMemoryUserRepository();
+            let storedUserOrError = await repository.findBy(new UniqueEntityID('12345'));
 
-        expect(storedUserOrError.isFailed).toBeTruthy();
+            expect(storedUserOrError.isFailed).toBeTruthy();
+        })();
     });
 
 });

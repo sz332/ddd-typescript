@@ -16,7 +16,7 @@ export class MongoDB {
         const url = this.url;
         const dbname = this.dbname;
 
-        const promise = new Promise<MongoDBConnection>((resolve, reject) => {
+        return new Promise<MongoDBConnection>((resolve, reject) => {
             MongoClient.connect(url, (err, db) => {
                 if (err) {
                     reject(err);
@@ -25,8 +25,6 @@ export class MongoDB {
                 }
             });
         });
-
-        return promise;
     }
 
 }

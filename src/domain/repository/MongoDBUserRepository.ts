@@ -2,33 +2,29 @@ import { UserRepository } from "./UserRepository";
 import { User } from "../entity/User";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
+import { MongoDBConnection } from "../../ports/mongodb/MongoDBConnection";
 
-interface MongoDBConnectionProps {
-    uri: string
-}
-
-// https://tutorialedge.net/typescript/typescript-mongodb-beginners-tutorial/
 export class MongoDBUserRepository implements UserRepository {
 
-    private readonly props: MongoDBConnectionProps;
+    private readonly connection: MongoDBConnection;
 
-    public constructor(props: MongoDBConnectionProps){
-        this.props = props;
+    public constructor(connection: MongoDBConnection){
+        this.connection = connection;
     }
 
-    add(user: User): void {
+    async add(user: User): Promise<void> {
         throw new Error("Method not implemented.");
     }
 
-    remove(id: UniqueEntityID): void {
+    async remove(id: UniqueEntityID): Promise<void>{
         throw new Error("Method not implemented.");
     }
 
-    findBy(id: UniqueEntityID): Result<User> {
+    async findBy(id: UniqueEntityID): Promise<Result<User>> {
         throw new Error("Method not implemented.");
     }
 
-    findAll(): readonly User[] {
+    async findAll(): Promise<ReadonlyArray<User>> {
         throw new Error("Method not implemented.");
     }
 

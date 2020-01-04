@@ -4,9 +4,9 @@ import { UniqueEntityID } from "../../core/UniqueEntityID";
 
 export interface UserRepository {
 
-    add(user: User): void;
-    remove(id: UniqueEntityID): void;
-    findBy(id: UniqueEntityID): Result<User>;
-    findAll(): ReadonlyArray<User>;
+    add(user: User): Promise<void>;
+    remove(id: UniqueEntityID): Promise<void>;
+    findBy(id: UniqueEntityID): Promise<Result<User>>;
+    findAll(): Promise<ReadonlyArray<User>>;
 
 }
