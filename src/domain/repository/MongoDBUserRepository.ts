@@ -4,19 +4,26 @@ import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
 import { MongoDBConnection } from "../../ports/mongodb/MongoDBConnection";
 
+const USERS_COLLECTION = 'users';
+
 export class MongoDBUserRepository implements UserRepository {
 
     private readonly connection: MongoDBConnection;
 
-    public constructor(connection: MongoDBConnection){
+    public constructor(connection: MongoDBConnection) {
         this.connection = connection;
     }
 
     async add(user: User): Promise<void> {
-        throw new Error("Method not implemented.");
+
+        this.connection.findCollection(USERS_COLLECTION).then(collection => {
+            collection.insert(user);
+        }
+        );
+
     }
 
-    async remove(id: UniqueEntityID): Promise<void>{
+    async remove(id: UniqueEntityID): Promise<void> {
         throw new Error("Method not implemented.");
     }
 
