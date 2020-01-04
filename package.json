@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/jest": "^24.0.25",
+    "@types/mongodb": "^3.3.14",
     "@types/node": "^13.1.2",
     "@types/uuid": "^3.4.6",
     "jest": "^24.9.0",
@@ -39,7 +40,7 @@
   "dependencies": {
     "bcrypt": "^3.0.7",
     "express": "^4.17.1",
-    "mongodb": "^3.4.1",
+    "monk": "^7.1.1",
     "shallow-equal-object": "^1.1.1"
   }
 }
