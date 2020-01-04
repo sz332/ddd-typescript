@@ -21,7 +21,7 @@ export class MongoDB {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(new MongoDBConnection(db.db(dbname)));
+                    resolve(new MongoDBConnection(db, db.db(dbname)));
                 }
             });
         });
