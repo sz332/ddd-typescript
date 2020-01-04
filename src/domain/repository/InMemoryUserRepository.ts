@@ -16,12 +16,12 @@ export class InMemoryUserRepository implements UserRepository {
     }
 
     async remove(id: UniqueEntityID): Promise<void> {
-        let index = this.users.findIndex(d => id.equals(d.id()));
+        let index = this.users.findIndex(d => id === d.id());
         this.users.splice(index, 1);
     }
 
     async findBy(id: UniqueEntityID): Promise<Result<User>> {
-        let foundUser = this.users.find(u => id.equals(u.id()));
+        let foundUser = this.users.find(u => id === u.id());
         return foundUser ? Result.ok<User>(foundUser) : Result.fail<User>("User not found");
     }
 
