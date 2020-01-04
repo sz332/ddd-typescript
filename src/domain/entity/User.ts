@@ -2,6 +2,7 @@ import { Entity } from "../../core/Entity";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Email } from "../valueObject/Email";
 import { Password } from "../valueObject/Password";
+import { Media } from "../../core/Media";
 
 export enum UserType {
     NORMAL,
@@ -33,14 +34,22 @@ export class User extends Entity<UserProps>{
         return this.props.password;
     }
 
-    public changeType(newType: UserType) {
-        this.props.type = newType;
+    public import(media: Media) : User {
+
+        const id = new UniqueEntityID(media.ofString('id'));
+        const email = Email.create(media.ofString('email'));
+        const password = Password.create(media.ofString('password'), false);
+        const type: UserType = (<any>UserType)[media.ofString('type')];
+
+        return new User({ email, password, type }, id);
     }
 
-    public changePassword(password: Password){
-        this.props.password = password;
+    public export(media: Media) {
+        return media
+            .with("id", this.id().toString())
+            .with("email", this.props.email.value())            // FIXME use printer instead of getter
+            .with("password", this.props.password.value())      // FIXME use printer instead of getter
+            .with("type", this.props.type);
     }
-
-    
 
 }
