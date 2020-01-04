@@ -1,20 +1,32 @@
-import { Result } from '../../core/Result';
-import { MongoDBConnection } from './MongoDBConnection';
-import * as monk from "monk";
+import { MongoClient } from "mongodb";
+import { MongoDBConnection } from "./MongoDBConnection";
 
 export class MongoDB {
 
-    private readonly url: string;
+    url: string;
+    dbname: string;
 
-    constructor(url: string) {
+    constructor(url: string, dbname: string) {
         this.url = url;
+        this.dbname = dbname;
     }
 
-    public connect(): void {
-        const db = require('monk')(this.url);        
-        const users = db.get('users')
-        users.insert({ name: 'Tobi', bigdata: {} });
-        db.close();
+    async connect(): Promise<MongoDBConnection> {
+
+        const url = this.url;
+        const dbname = this.dbname;
+
+        const promise = new Promise<MongoDBConnection>((resolve, reject) => {
+            MongoClient.connect(url, (err, db) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(new MongoDBConnection(db.db(dbname)));
+                }
+            });
+        });
+
+        return promise;
     }
 
 }

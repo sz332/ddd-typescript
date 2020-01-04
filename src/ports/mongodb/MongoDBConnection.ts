@@ -1,14 +1,15 @@
+import { Db, Collection } from "mongodb";
 
 export class MongoDBConnection {
 
-    private readonly client: ;
+    private readonly db: Db;
 
-    constructor(client: mongo.MongoClient){
-        this.client = client;
+    constructor(db: Db) {
+        this.db = db;
     }
 
-    public disconnect(){
-        this.client.close();
+    async createCollection(name: string): Promise<Collection<any>>{
+        return this.db.createCollection(name);
     }
 
 }

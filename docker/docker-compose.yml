@@ -1,0 +1,19 @@
+version: '3'
+services:
+    database:
+        image: 'mongo'
+        container_name: 'ddd-mongo-container'
+        environment: 
+            - MONGO_INITDB_DATABASE=ddd
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=admin
+            - MONGO_NON_ROOT_USERNAME=ddduser
+            - MONGO_NON_ROOT_PASSWORD=secret
+        volumes:
+            - mongodb:/data/db
+            -  ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        ports:
+            - '27017-27019:27017-27019'
+
+volumes:
+    mongodb:
