@@ -1,10 +1,11 @@
 import { ValueObject } from "../../core/ValueObject";
+import { Media, MediaSupport } from "../../core/Media";
 
 export interface EmailProps {
     value: string;
 }
 
-export class Email extends ValueObject<EmailProps>{
+export class Email extends ValueObject<EmailProps> implements MediaSupport {
 
     private constructor(props: EmailProps) {
         super(props);
@@ -24,6 +25,10 @@ export class Email extends ValueObject<EmailProps>{
 
     matches(email: string): boolean {
         return this.props.value === email;
+    }
+
+    with(media: Media): Media {
+        return media.with('email', this.props.value);
     }
 
 }

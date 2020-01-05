@@ -1,11 +1,12 @@
 import { ValueObject } from "../../core/ValueObject";
 import bcrypt from "bcrypt";
+import { MediaSupport, Media } from "../../core/Media";
 
 export interface PasswordProps {
     value: string;
 }
 
-export class Password extends ValueObject<PasswordProps>{
+export class Password extends ValueObject<PasswordProps> implements MediaSupport {
 
     private constructor(props: PasswordProps) {
         super(props);
@@ -24,8 +25,8 @@ export class Password extends ValueObject<PasswordProps>{
         return bcrypt.compareSync(password, this.props.value);
     }
 
-    value(): string {
-        return this.props.value;
+    with(media: Media): Media {
+        return media.with('password', this.props.value);
     }
 
 }

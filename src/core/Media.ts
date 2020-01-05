@@ -5,10 +5,20 @@ export interface Persistable <T> {
 
 }
 
+export interface MediaSupport {
+
+    with(media: Media): Media;
+
+}
+
 export interface Media {
+    
     with(key: string, value: any): Media;
-    of(key: string): any;
-    ofString(key: string): string;
+    extend(media: MediaSupport): Media;
+
+    value(key: string): any;
+    valueAsString(key: string): string;
+
 }
 
 export class JSObjectMedia implements Media {
@@ -19,13 +29,18 @@ export class JSObjectMedia implements Media {
         this.data = data;
     }
 
+    extend(supporter : MediaSupport) : Media {
+        const media = new JSObjectMedia(Object.assign({}, this.data));
+        return supporter.with(media);
+    }
+
     with(parameter: string, value: any): JSObjectMedia {
         const clone: any = Object.assign({}, this.data);
         clone[parameter] = value;
         return new JSObjectMedia(clone);
     }
 
-    of(key: string): any {
+    value(key: string): any {
 
         const data: any = this.data;
 
@@ -36,8 +51,8 @@ export class JSObjectMedia implements Media {
         throw new Error("Key " + key + " was missing from media");
     }
 
-    ofString(key: string): string {
-        const value: any = this.of(key) as string;
+    valueAsString(key: string): string {
+        const value: any = this.value(key);
 
         if (value instanceof String) {
             return value as string;

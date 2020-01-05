@@ -2,7 +2,7 @@ import { Entity } from "../../core/Entity";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Email } from "../valueObject/Email";
 import { Password } from "../valueObject/Password";
-import { Media } from "../../core/Media";
+import { Media, Persistable } from "../../core/Media";
 
 export enum UserType {
     NORMAL,
@@ -16,7 +16,7 @@ interface UserProps {
     type: UserType;
 }
 
-export class User extends Entity<UserProps>{
+export class User extends Entity<UserProps> implements Persistable<User> {
 
     private constructor(props: UserProps, id?: UniqueEntityID) {
         super(props, id);
@@ -36,10 +36,10 @@ export class User extends Entity<UserProps>{
 
     public import(media: Media) : User {
 
-        const id = new UniqueEntityID(media.ofString('id'));
-        const email = Email.create(media.ofString('email'));
-        const password = Password.create(media.ofString('password'), false);
-        const type: UserType = (<any>UserType)[media.ofString('type')];
+        const id = new UniqueEntityID(media.valueAsString('id'));
+        const email = Email.create(media.valueAsString('email'));
+        const password = Password.create(media.valueAsString('password'), false);
+        const type: UserType = (<any>UserType)[media.valueAsString('type')];
 
         return new User({ email, password, type }, id);
     }
@@ -47,9 +47,9 @@ export class User extends Entity<UserProps>{
     public export(media: Media) {
         return media
             .with("id", this.id().toString())
-            .with("email", this.props.email.value())            // FIXME use printer instead of getter
-            .with("password", this.props.password.value())      // FIXME use printer instead of getter
-            .with("type", this.props.type);
+            .with("type", this.props.type)
+            .extend(this.props.email)            
+            .extend(this.props.password);
     }
 
 }
