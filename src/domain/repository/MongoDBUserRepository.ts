@@ -18,11 +18,8 @@ export class MongoDBUserRepository implements UserRepository {
     async add(user: User): Promise<void> {
 
         this.connection.findCollection(USERS_COLLECTION).then(collection => {
-
-            const media = new JSObjectMedia();
-            const exported = user.export(media);
-
-            collection.insert(exported);
+            let media = user.export(new JSObjectMedia()) as JSObjectMedia;
+            collection.insert(media.asObject());
         });
 
     }

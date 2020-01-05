@@ -3,7 +3,7 @@
 // https://www.yegor256.com/2016/04/05/printers-instead-of-getters.html
 
 export interface Persistable {
-    export(media: Media): object;
+    export(media: Media): Media;
 }
 
 export interface MediaSupport {
@@ -19,8 +19,7 @@ export interface Media {
 
     value(key: string): any;
     valueAsString(key: string): string;
-
-    asObject(): object;
+    
 }
 
 export class JSObjectMedia implements Media {
