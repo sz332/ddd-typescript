@@ -23,8 +23,7 @@ export class MongoDBUserRepository implements UserRepository {
             const exported = user.export(media);
 
             collection.insert(exported);
-        }
-        );
+        });
 
     }
 
@@ -36,7 +35,7 @@ export class MongoDBUserRepository implements UserRepository {
 
         const query = { "id": { "$eq": id.toString() } };
 
-        const options = { };
+        const options = {};
 
         return new Promise<Result<User>>((resolve, reject) => {
 
@@ -45,7 +44,7 @@ export class MongoDBUserRepository implements UserRepository {
                     .then(
                         (document) => {
                             if (document) {
-                                resolve(Result.ok(User.createFromDocument(document)));
+                                resolve(Result.ok(User.fromDocument(document)));
                             } else {
                                 resolve(Result.fail("User not found with id " + id.toString()));
                             }

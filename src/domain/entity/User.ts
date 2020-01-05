@@ -26,7 +26,7 @@ export class User extends Entity<UserProps> implements Persistable {
         return new User({ email, password, type }, id);
     }
 
-    public static createFromDocument(document: any): User {
+    public static fromDocument(document: any): User {
         const id = new UniqueEntityID(document.id);
         const email = Email.create(document.email);
         const password = Password.create(document.password, false);
