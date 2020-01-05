@@ -16,7 +16,7 @@ interface UserProps {
     type: UserType;
 }
 
-export class User extends Entity<UserProps> implements Persistable<User> {
+export class User extends Entity<UserProps> implements Persistable {
 
     private constructor(props: UserProps, id?: UniqueEntityID) {
         super(props, id);
@@ -24,6 +24,25 @@ export class User extends Entity<UserProps> implements Persistable<User> {
 
     public static create(email: Email, password: Password, type: UserType = UserType.NORMAL): User {
         return new User({ email, password, type });
+    }
+
+    public static createFrom(media: Media): User {
+        const id = new UniqueEntityID(media.valueAsString('id'));
+        const email = Email.create(media.valueAsString('email'));
+        const password = Password.create(media.valueAsString('password'), false);
+        const type: UserType = (<any>UserType)[media.valueAsString('type')];
+
+        return new User({ email, password, type }, id);
+    }
+
+    public export(media: Media): object {
+        const result = media
+            .with("id", this.id().toString())
+            .with("type", this.props.type)
+            .extend(this.props.email)
+            .extend(this.props.password);;
+
+        return result.asObject();
     }
 
     public email(): Email {
@@ -34,22 +53,5 @@ export class User extends Entity<UserProps> implements Persistable<User> {
         return this.props.password;
     }
 
-    public import(media: Media) : User {
-
-        const id = new UniqueEntityID(media.valueAsString('id'));
-        const email = Email.create(media.valueAsString('email'));
-        const password = Password.create(media.valueAsString('password'), false);
-        const type: UserType = (<any>UserType)[media.valueAsString('type')];
-
-        return new User({ email, password, type }, id);
-    }
-
-    public export(media: Media) {
-        return media
-            .with("id", this.id().toString())
-            .with("type", this.props.type)
-            .extend(this.props.email)            
-            .extend(this.props.password);
-    }
 
 }

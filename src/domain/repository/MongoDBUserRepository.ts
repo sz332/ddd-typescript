@@ -3,6 +3,7 @@ import { User } from "../entity/User";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
 import { MongoDBConnection } from "../../ports/mongodb/MongoDBConnection";
+import { JSObjectMedia } from "../../core/Media";
 
 const USERS_COLLECTION = 'users';
 
@@ -17,14 +18,18 @@ export class MongoDBUserRepository implements UserRepository {
     async add(user: User): Promise<void> {
 
         this.connection.findCollection(USERS_COLLECTION).then(collection => {
-            collection.insert(user);
+
+            const media = new JSObjectMedia();
+            const exported = user.export(media);
+
+            collection.insert(exported);
         }
         );
 
     }
 
     async remove(id: UniqueEntityID): Promise<void> {
-        throw new Error("Method not implemented.");
+        //return this.connection.findCollection(USERS_COLLECTION)).findOneAndDelete();
     }
 
     async findBy(id: UniqueEntityID): Promise<Result<User>> {

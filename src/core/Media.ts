@@ -1,8 +1,5 @@
-export interface Persistable <T> {
-
-    import(media : Media) : T;
-    export(media: Media) : void;
-
+export interface Persistable {
+    export(media: Media): object;
 }
 
 export interface MediaSupport {
@@ -14,11 +11,12 @@ export interface MediaSupport {
 export interface Media {
     
     with(key: string, value: any): Media;
-    extend(media: MediaSupport): Media;
+    extend(supporter: MediaSupport): Media;
 
     value(key: string): any;
     valueAsString(key: string): string;
 
+    asObject(): object;
 }
 
 export class JSObjectMedia implements Media {
@@ -29,15 +27,15 @@ export class JSObjectMedia implements Media {
         this.data = data;
     }
 
-    extend(supporter : MediaSupport) : Media {
-        const media = new JSObjectMedia(Object.assign({}, this.data));
-        return supporter.with(media);
-    }
-
     with(parameter: string, value: any): JSObjectMedia {
         const clone: any = Object.assign({}, this.data);
         clone[parameter] = value;
         return new JSObjectMedia(clone);
+    }
+
+    extend(supporter : MediaSupport) : Media {
+        const media = new JSObjectMedia(Object.assign({}, this.data));
+        return supporter.with(media);
     }
 
     value(key: string): any {
