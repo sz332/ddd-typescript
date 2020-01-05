@@ -33,7 +33,26 @@ export class MongoDBUserRepository implements UserRepository {
     }
 
     async findBy(id: UniqueEntityID): Promise<Result<User>> {
-        throw new Error("Method not implemented.");
+
+        const query = { "id": { "$eq": id.toString() } };
+
+        const options = { };
+
+        return new Promise<Result<User>>((resolve, reject) => {
+
+            this.connection.findCollection(USERS_COLLECTION).then((collection) => {
+                collection.findOne(query, options)
+                    .then(
+                        (document) => {
+                            if (document) {
+                                resolve(Result.ok(User.createFromDocument(document)));
+                            } else {
+                                resolve(Result.fail("User not found with id " + id.toString()));
+                            }
+                        });
+            });
+
+        });
     }
 
     async findAll(): Promise<ReadonlyArray<User>> {

@@ -22,15 +22,15 @@ export class User extends Entity<UserProps> implements Persistable {
         super(props, id);
     }
 
-    public static create(email: Email, password: Password, type: UserType = UserType.NORMAL): User {
-        return new User({ email, password, type });
+    public static create(email: Email, password: Password, type: UserType = UserType.NORMAL, id?: UniqueEntityID): User {
+        return new User({ email, password, type }, id);
     }
 
-    public static createFrom(media: Media): User {
-        const id = new UniqueEntityID(media.valueAsString('id'));
-        const email = Email.create(media.valueAsString('email'));
-        const password = Password.create(media.valueAsString('password'), false);
-        const type: UserType = (<any>UserType)[media.valueAsString('type')];
+    public static createFromDocument(document: any): User {
+        const id = new UniqueEntityID(document.id);
+        const email = Email.create(document.email);
+        const password = Password.create(document.password, false);
+        const type: UserType = (<any>UserType)[document.type];
 
         return new User({ email, password, type }, id);
     }

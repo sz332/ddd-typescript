@@ -1,3 +1,7 @@
+// https://blog.g4s8.wtf/fully-encapsulated/
+// https://www.driver733.com/2018/11/25/printers-are-worse-than-getters.html
+// https://www.yegor256.com/2016/04/05/printers-instead-of-getters.html
+
 export interface Persistable {
     export(media: Media): object;
 }
