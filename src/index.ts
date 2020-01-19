@@ -13,6 +13,7 @@ console.log(result);
     let mongoDB = new MongoDB('mongodb://admin:admin@localhost:27017/', 'ddd');
     let conn = await mongoDB.connect();
     let myCollection = await conn.createCollection('myAsyncCollection2');
+    myCollection.insertOne({"name": "John Doe", "age": 23, "female": true});
 
     console.log(myCollection);
 

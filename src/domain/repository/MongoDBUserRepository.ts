@@ -43,7 +43,7 @@ export class MongoDBUserRepository implements UserRepository {
                             if (document) {
                                 resolve(Result.ok(User.fromDocument(document)));
                             } else {
-                                resolve(Result.fail("User not found with id " + id.toString()));
+                                resolve(Result.fail("User not found for id " + id.toString()));
                             }
                         });
             });
