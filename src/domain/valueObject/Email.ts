@@ -27,7 +27,7 @@ export class Email extends ValueObject<EmailProps> implements MediaSupport {
         return this.props.value === email;
     }
 
-    with(media: Media): Media {
+    with<T extends Media>(media: T): T {
         return media.with('email', this.props.value);
     }
 

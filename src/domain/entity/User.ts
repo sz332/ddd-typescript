@@ -35,7 +35,7 @@ export class User extends Entity<UserProps> implements Persistable {
         return new User({ email, password, type }, id);
     }
 
-    public export(media: Media): Media {
+    public export<T extends Media>(media: T): T{
         return media
             .with("id", this.id().toString())
             .with("type", this.props.type)

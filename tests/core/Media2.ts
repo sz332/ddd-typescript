@@ -1,6 +1,3 @@
-// https://blog.g4s8.wtf/fully-encapsulated/
-// https://www.driver733.com/2018/11/25/printers-are-worse-than-getters.html
-// https://www.yegor256.com/2016/04/05/printers-instead-of-getters.html
 export interface Persistable {
 
     export<T extends Media>(media: T): T;
@@ -23,9 +20,9 @@ export interface Media {
     
 }
 
-export class JsObjectMedia implements Media {
+export class JsonMedia implements Media {
 
-    private readonly data: any;
+    private readonly data: object;
 
     constructor() {
         this.data = {};
@@ -38,6 +35,10 @@ export class JsObjectMedia implements Media {
 
     extend(mediaSupport: MediaSupport): this {
         return mediaSupport.with(this);
+    }
+
+    asObject(): object {
+        return Object.assign({}, this.data);
     }
 
     value(key: string): any {
@@ -61,8 +62,31 @@ export class JsObjectMedia implements Media {
         throw new Error("Key " + key + " was not a string");
     }
 
-    asObject(): object {
-        return Object.assign({}, this.data);
+}
+
+export class InternalBean implements MediaSupport {
+
+    with<T extends Media>(media: T): T {
+        return media.with('name', 'internalBean');
     }
 
 }
+
+export class MyBean implements Persistable {
+
+    private readonly internal: InternalBean;
+
+    constructor() {
+        this.internal = new InternalBean();
+    }
+
+    export<T extends Media>(media: T): T {
+        return media.with('myBean', '23').extend(this.internal);
+    }
+
+}
+
+let myBean = new MyBean();
+let exporter = new JsonMedia();
+let o = myBean.export(exporter);
+console.log(o.asObject());

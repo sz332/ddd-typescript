@@ -25,7 +25,7 @@ export class Password extends ValueObject<PasswordProps> implements MediaSupport
         return bcrypt.compareSync(password, this.props.value);
     }
 
-    with(media: Media): Media {
+    with<T extends Media>(media: T): T {
         return media.with('password', this.props.value);
     }
 

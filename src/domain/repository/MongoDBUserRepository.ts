@@ -3,7 +3,7 @@ import { User } from "../entity/User";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
 import { MongoDBConnection } from "../../ports/mongodb/MongoDBConnection";
-import { JSObjectMedia } from "../../core/Media";
+import { JsObjectMedia } from "../../core/Media";
 
 const USERS_COLLECTION = 'users';
 
@@ -18,7 +18,7 @@ export class MongoDBUserRepository implements UserRepository {
     async add(user: User): Promise<void> {
 
         this.connection.findCollection(USERS_COLLECTION).then(collection => {
-            let media = user.export(new JSObjectMedia()) as JSObjectMedia;
+            let media = user.export(new JsObjectMedia());
             collection.insert(media.asObject());
         });
 
