@@ -25,7 +25,11 @@ export class MongoDBUserRepository implements UserRepository {
     }
 
     async remove(id: UniqueEntityID): Promise<void> {
-        //return this.connection.findCollection(USERS_COLLECTION)).findOneAndDelete();
+        let collection = await this.connection.findCollection(USERS_COLLECTION);
+
+        const query = { "id": { "$eq": id.toString() } };
+
+        collection.findOneAndDelete(query);
     }
 
     async findBy(id: UniqueEntityID): Promise<Result<User>> {
@@ -41,7 +45,7 @@ export class MongoDBUserRepository implements UserRepository {
                     .then(
                         (document) => {
                             if (document) {
-                                resolve(Result.ok(User.fromDocument(document)));
+                                resolve(Result.ok(User.createFromDocument(document)));
                             } else {
                                 resolve(Result.fail("User not found for id " + id.toString()));
                             }
