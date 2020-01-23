@@ -1,3 +1,5 @@
+// https://itnext.io/production-ready-node-js-rest-apis-setup-using-typescript-postgresql-and-redis-a9525871407
+
 import { MongoDB } from "./ports/mongodb/MongoDB";
 import { User } from "./domain/entity/User";
 import { Email } from "./domain/valueObject/Email";
