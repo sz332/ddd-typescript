@@ -22,11 +22,11 @@ export class User extends Entity<UserProps> implements Persistable {
         super(props, id);
     }
 
-    public static create(email: Email, password: Password, type: UserType = UserType.NORMAL, id?: UniqueEntityID): User {
+    static create(email: Email, password: Password, type: UserType = UserType.NORMAL, id?: UniqueEntityID): User {
         return new User({ email, password, type }, id);
     }
 
-    public static createFromDocument(document: any): User {
+    static createFromDocument(document: any): User {
         const id = new UniqueEntityID(document.id);
         const email = Email.create(document.email);
         const password = Password.create(document.password, false);
@@ -35,7 +35,7 @@ export class User extends Entity<UserProps> implements Persistable {
         return new User({ email, password, type }, id);
     }
 
-    public export<T extends Media>(media: T): T{
+    export<T extends Media>(media: T): T{
         return media
             .with("id", this.id().toString())
             .with("type", this.props.type)
@@ -43,11 +43,11 @@ export class User extends Entity<UserProps> implements Persistable {
             .extend(this.props.password);;
     }
 
-    public email(): Email {
+    email(): Email {
         return this.props.email;
     }
 
-    public password(): Password {
+    password(): Password {
         return this.props.password;
     }
 

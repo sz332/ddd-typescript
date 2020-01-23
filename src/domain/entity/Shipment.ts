@@ -21,11 +21,11 @@ export class Shipment extends Entity<ShipmentProps>{
         super(props, id);
     }
 
-    public static create(sender: User, pickupAddress: Address, deliveryAddress: Address, pricedParcel: PricedParcel): Shipment {
+    static create(sender: User, pickupAddress: Address, deliveryAddress: Address, pricedParcel: PricedParcel): Shipment {
         return new Shipment({ sender, pickupAddress, deliveryAddress, pricedParcel });
     }
 
-    public changeDeliveryAddress(newAddress : Address){
+    changeDeliveryAddress(newAddress : Address){
         // FIXME can the user change the delivery address completely, or only partially
         this.props.deliveryAddress = newAddress;
         // send notification event
