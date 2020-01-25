@@ -8,7 +8,7 @@ import { Password } from "../valueObject/Password";
 //https://khalilstemmler.com/articles/enterprise-typescript-nodejs/application-layer-use-cases/
 
 interface CreateUserRequestDTO {
-    userName: string,
+    username: string,
     password: string
 }
 
@@ -24,7 +24,7 @@ export class CreateUserUseCase implements UseCase<CreateUserRequestDTO, any> {
 
         console.log("Executed create user use case");
 
-        let user = User.create(Email.create(request.userName), Password.create(request.password));
+        let user = User.create(Email.create(request.username), Password.create(request.password));
 
         return Result.ok<User>(user);
     }
