@@ -1,12 +1,10 @@
-import { UseCase } from "../../core/UseCase";
-import { UserRepository } from "../repository/UserRepository";
-import { Result } from "../../core/Result";
-import { User } from "../entity/User";
-import { Email } from "../valueObject/Email";
-import { Password } from "../valueObject/Password";
-import { UniqueEntityID } from "../../core/UniqueEntityID";
+import { UseCase } from "../../../core/UseCase";
+import { UserRepository } from "../../repository/UserRepository";
+import { Result } from "../../../core/Result";
+import { User } from "../../entity/User";
+import { UniqueEntityID } from "../../../core/UniqueEntityID";
 
-interface GetUserRequestDTO{
+interface GetUserRequestDTO {
     id: string
 }
 

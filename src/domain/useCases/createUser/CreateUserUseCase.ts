@@ -1,9 +1,9 @@
-import { UseCase } from "../../core/UseCase";
-import { UserRepository } from "../repository/UserRepository";
-import { Result } from "../../core/Result";
-import { User } from "../entity/User";
-import { Email } from "../valueObject/Email";
-import { Password } from "../valueObject/Password";
+import { UseCase } from "../../../core/UseCase";
+import { UserRepository } from "../../repository/UserRepository";
+import { Result } from "../../../core/Result";
+import { User } from "../../entity/User";
+import { Email } from "../../valueObject/Email";
+import { Password } from "../../valueObject/Password";
 
 //https://khalilstemmler.com/articles/enterprise-typescript-nodejs/application-layer-use-cases/
 
