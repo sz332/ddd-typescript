@@ -1,9 +1,10 @@
 import * as express from 'express'
 
 export abstract class BaseController {
+  
   // or even private
-  protected req: express.Request;
-  protected res: express.Response;
+  protected req!: express.Request;
+  protected res!: express.Response;
 
   protected abstract executeImpl (): Promise<void | any>;
 

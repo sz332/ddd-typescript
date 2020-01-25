@@ -22,8 +22,8 @@ export class Result<T> {
         return !this.isSuccess;
     }
 
-    get error(): string | undefined {
-        return this.result.error;
+    get error(): string {
+        return this.result.error ?? "Error occured on server side";
     }
 
     get value(): T {
