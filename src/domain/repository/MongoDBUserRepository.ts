@@ -38,7 +38,7 @@ export class MongoDBUserRepository implements UserRepository {
 
         const options = {};
 
-        return new Promise<Result<User>>((resolve, reject) => {
+        return new Promise<Result<User>>((resolve, _) => {
 
             this.connection.findCollection(USERS_COLLECTION).then((collection) => {
                 collection.findOne(query, options)

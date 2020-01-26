@@ -3,7 +3,7 @@ import { CatsController } from './CatsController';
 
 @Module({
   imports: [],
-  controllers: [CatsController],
+  controllers: [CatsController, GetUserController],
   providers: [],
 })
 export class AppModule {
