@@ -19,9 +19,6 @@ export interface Media {
     with(key: string, value: unknown): this;
     extend(mediaSupport: MediaSupport): this;
 
-    value(key: string): unknown;
-    valueAsString(key: string): string;
-    
 }
 
 export class JsObjectMedia implements Media {
@@ -39,27 +36,6 @@ export class JsObjectMedia implements Media {
 
     extend(mediaSupport: MediaSupport): this {
         return mediaSupport.with(this);
-    }
-
-    value(key: string): unknown {
-
-        const data: any = this.data;
-
-        if (data[key]) {
-            return data[key];
-        }
-
-        throw new Error("Key " + key + " was missing from media");
-    }
-
-    valueAsString(key: string): string {
-        const value: any = this.value(key);
-
-        if (value instanceof String) {
-            return value as string;
-        }
-
-        throw new Error("Key " + key + " was not a string");
     }
 
     asObject(): object {
