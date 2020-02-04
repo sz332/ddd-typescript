@@ -16,10 +16,10 @@ export interface MediaSupport {
 
 export interface Media {
 
-    with(key: string, value: any): this;
+    with(key: string, value: unknown): this;
     extend(mediaSupport: MediaSupport): this;
 
-    value(key: string): any;
+    value(key: string): unknown;
     valueAsString(key: string): string;
     
 }
@@ -32,7 +32,7 @@ export class JsObjectMedia implements Media {
         this.data = {};
     }
 
-    with(key: string, value: any): this {
+    with(key: string, value: unknown): this {
         this.data[key] = value;
         return this;
     }
@@ -41,7 +41,7 @@ export class JsObjectMedia implements Media {
         return mediaSupport.with(this);
     }
 
-    value(key: string): any {
+    value(key: string): unknown {
 
         const data: any = this.data;
 
