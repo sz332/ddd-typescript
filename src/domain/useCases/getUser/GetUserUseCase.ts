@@ -12,15 +12,10 @@ interface GetUserRequestDTO {
 @Injectable()
 export class GetUserUseCase implements UseCase<GetUserRequestDTO, any> {
 
-    private readonly userRepo: UserRepository;
-
-    constructor(@Inject('UserRepository') userRepo : UserRepository) {
-        console.log("Injecting user repository into GetUserCase, userRepo = " + userRepo);
-        this.userRepo = userRepo;
+    constructor(@Inject('UserRepository') private readonly userRepo : UserRepository) {
     }
 
     public async execute(request: GetUserRequestDTO): Promise<Result<User>> {
-        console.log("Executed get user use case");
         let user = await this.userRepo.findBy(new UniqueEntityID(request.id));
         return user;
     }

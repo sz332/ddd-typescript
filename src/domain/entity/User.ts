@@ -38,18 +38,8 @@ export class User extends Entity<UserProps> implements Persistable {
     export<T extends Media>(media: T): T{
         return media
             .with("id", this.id().toString())
-            .with("type", this.props.type)
-            .extend(this.props.email)
-            .extend(this.props.password);;
+            .with("type", UserType[this.props.type].toString())
+            .extend(this.props.email);
     }
-
-    email(): Email {
-        return this.props.email;
-    }
-
-    password(): Password {
-        return this.props.password;
-    }
-
 
 }
