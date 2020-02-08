@@ -5,11 +5,18 @@ import { User } from '../../entity/User';
 @Controller()
 export class GetUserController {
 
-    constructor (private readonly useCase: GetUserUseCase) {
+    private readonly useCase: GetUserUseCase;
+
+    constructor (@Inject('GetUserUseCase') useCase: GetUserUseCase) {
+        console.log("Injecting usecase into GetUserController, useCase = " + useCase);
+        this.useCase = useCase;
     }
 
     @Get('users/:id')
     async findById(@Param() id: string): Promise<User> {
+
+        console.log("Current useCase = " + this.useCase);
+
         let userOrError = await this.useCase.execute({id: id});
 
         if (userOrError.isSuccess){

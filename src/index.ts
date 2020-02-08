@@ -26,6 +26,7 @@ import { HttpServer } from "./ports/http/HttpServer";
 async function bootstrap() {
     let server = new HttpServer(8080);
     await server.start();
+    console.log("Server started successfully...");
 }
 
 bootstrap();

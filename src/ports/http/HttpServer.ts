@@ -15,8 +15,10 @@ export class HttpServer {
     }
 
     async start() {
-          const app = await NestFactory.create(AppModule);
-          await app.listen(this.port);
+          const app = await NestFactory.create(AppModule, {
+              logger: ["debug", "error", "log", "warn", "verbose"]
+          });
+          return await app.listen(this.port);
     }
 
 }

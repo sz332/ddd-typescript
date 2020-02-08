@@ -15,6 +15,7 @@ export class GetUserUseCase implements UseCase<GetUserRequestDTO, any> {
     private readonly userRepo: UserRepository;
 
     constructor(@Inject('UserRepository') userRepo : UserRepository) {
+        console.log("Injecting user repository into GetUserCase, userRepo = " + userRepo);
         this.userRepo = userRepo;
     }
 

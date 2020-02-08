@@ -7,15 +7,11 @@ import { GetUserUseCase } from '../../domain/useCases/getUser/GetUserUseCase';
 @Module({
   imports: [],
   controllers: [CatsController, GetUserController],
-  providers: [{
-    provide: 'UserRepository',
-    useClass: InMemoryUserRepository
-  }, 
-  {
-    provide: GetUserUseCase,
-    useClass: GetUserUseCase
-  }],
+  providers: [
+    {provide: 'GetUserUseCase', useClass: GetUserUseCase},
+    {provide: 'UserRepository', useClass: InMemoryUserRepository}
+  ],
 })
 export class AppModule {
-    
+
 }
