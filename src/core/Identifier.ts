@@ -13,7 +13,7 @@ export class Identifier<T> {
       return id.toValue() === this.value;
     }
   
-    toString () {
+    asString (): String {
       return String(this.value);
     }
   

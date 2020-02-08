@@ -13,11 +13,11 @@ export class GetUserController {
     }
 
     @Get('users/:id')
-    async findById(@Param() id: string): Promise<User> {
+    async findById(@Param("id") id: string): Promise<User> {
 
         console.log("Current useCase = " + this.useCase);
 
-        let userOrError = await this.useCase.execute({id: id});
+        let userOrError = await this.useCase.execute({id});
 
         if (userOrError.isSuccess){
             return userOrError.value;

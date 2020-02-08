@@ -1,8 +1,10 @@
 import { UserRepository } from "./UserRepository";
-import { User } from "../entity/User";
+import { User, UserType } from "../entity/User";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
 import { Injectable } from "@nestjs/common";
+import { Password } from "../valueObject/Password";
+import { Email } from "../valueObject/Email";
 
 @Injectable()
 export class InMemoryUserRepository implements UserRepository {
@@ -11,6 +13,7 @@ export class InMemoryUserRepository implements UserRepository {
 
     constructor() {
         this.users = new Array<User>();
+        this.users.push(User.create(Email.create('test@mail.com'), Password.create('12345'), UserType.NORMAL, new UniqueEntityID(2)));
     }
 
     async add(user: User): Promise<void> {
@@ -23,7 +26,10 @@ export class InMemoryUserRepository implements UserRepository {
     }
 
     async findBy(id: UniqueEntityID): Promise<Result<User>> {
-        let foundUser = this.users.find(u => id === u.id());
+
+        console.log("Find user by id = " + id.toString());
+
+        let foundUser = this.users.find(u => id.toValue() == u.id().toValue());
         return foundUser ? Result.ok<User>(foundUser) : Result.fail<User>("User not found");
     }
 
