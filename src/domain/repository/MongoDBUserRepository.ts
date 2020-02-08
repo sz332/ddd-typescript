@@ -4,9 +4,11 @@ import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
 import { MongoDBConnection } from "../../ports/mongodb/MongoDBConnection";
 import { JsObjectMedia } from "../../core/Media";
+import { Injectable } from "@nestjs/common";
 
 const USERS_COLLECTION = 'users';
 
+@Injectable()
 export class MongoDBUserRepository implements UserRepository {
 
     private readonly connection: MongoDBConnection;

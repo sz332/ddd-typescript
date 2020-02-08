@@ -2,7 +2,9 @@ import { UserRepository } from "./UserRepository";
 import { User } from "../entity/User";
 import { UniqueEntityID } from "../../core/UniqueEntityID";
 import { Result } from "../../core/Result";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class InMemoryUserRepository implements UserRepository {
 
     private readonly users: Array<User>;

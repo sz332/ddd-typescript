@@ -1,14 +1,11 @@
-import { Controller, Get, Req, Param, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Req, Param, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { GetUserUseCase } from "./GetUserUseCase";
 import { User } from '../../entity/User';
 
 @Controller()
 export class GetUserController {
 
-    private useCase: GetUserUseCase;
-  
-    constructor (useCase: GetUserUseCase) {
-      this.useCase = useCase;
+    constructor (private readonly useCase: GetUserUseCase) {
     }
 
     @Get('users/:id')
